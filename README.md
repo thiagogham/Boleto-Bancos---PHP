@@ -1,1 +1,7 @@
-# Boleto Bancario em PHP
+# Boletos Bancários em PHP
+
+* Bradesco
+* Banco do Brasil
+* Banrisul
+* Sicredi
+* Itau
