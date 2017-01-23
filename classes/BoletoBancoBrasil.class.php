@@ -64,16 +64,12 @@ class BoletoBancoBrasil{
     *   @param string $linha String contendo a linha.
     *   @return 
     */
-
-
-    public function getCampoLivre()
-    {
+    public function getCampoLivre(){
         $length = strlen($this->getConvenio());
         $nossoNumero = $this->gerarNossoNumero();
         // Nosso número sem o DV - repare que ele só vem com DV quando o mesmo é menor que 17 caracteres
         // Então removemos o dígito (e o traço) apenas quando seu tamanho for menor que 17 caracteres
         strlen($this->getNossoNumero()) < 17 and $nossoNumero = substr($nossoNumero, 0, -2);
-
         // Sequencial do cliente com 17 dígitos
         // Apenas para convênio com 6 dígitos, modalidade sem registro - carteira 16 e 18 (definida para 21)
         if (strlen($this->getSequencial()) > 10) {
@@ -94,10 +90,14 @@ class BoletoBancoBrasil{
                 // Zeros (6) + Nosso número (17) + Carteira (2)
                 return '000000' . $nossoNumero . self::zeroFill($this->getCarteira(), 2);
         }
-
+        
         throw new Exception('O código do convênio precisa ter 4, 6 ou 7 dígitos!');
     }
-
+    /**
+     * Description
+     * @param type $codigo 
+     * @return type
+     */
     private function Montalinha($codigo){
         // Posição  Conteúdo
     // 1 a 3    Número do banco

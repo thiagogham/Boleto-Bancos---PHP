@@ -26,7 +26,6 @@ class BoletoBradesco{
         $dv		         = $this->DigitoVerificador($nnum);
         $nnum	         = "$nnum$dv";
         $zero	         = 0;
-        //$agencia         = sprintf("%05d",$info["agencia"]);
         $agencia         = sprintf("%04d",$info["agencia"]);
         $contacedente    = substr($info["conta_cedente"], 0, 7);
 		$agencia_b       = substr($agencia,0,4);
@@ -45,7 +44,6 @@ class BoletoBradesco{
         $p1               = $this->DigitoVerificador($contacedente);
 		$agencia_cd       = substr($agencia,0,4);
 		$agencia_dv       = substr($agencia,4,1);
-        //$agencia_codigo   = "$agencia_cd-$agencia_dv $contacedente/$p1";
         $agencia_codigo   = "$agencia_cd-$p1 $contacedente/$p1";
         
         return array(

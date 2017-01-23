@@ -12,7 +12,6 @@ class BoletoSicredi{
     */   
     public function GeraDados($info){
 
-        //$byteidt           = 2;
         $filler1             = 1;
         $filler2             = 0;
         $tipo_cobranca       = 3;
@@ -33,24 +32,14 @@ class BoletoSicredi{
             $nossonumero_dv      = str_replace(array('-','/','.'), '', $info["nosso_numero"]);
         }else{
             $nossonumero_dv = $this->GeraNossoNumero($agencia, $posto, $conta, $info["nosso_numero"]);
-            /*
-            $inicio_nosso_numero = date("y");
-            $nosso_numero        = sprintf("%05d", $info["nosso_numero"]);
-            $nnum                = $inicio_nosso_numero . $byteidt . $nosso_numero;
-            $dv_nosso_numero     = $this->DigitoVerificadorNossoNumero("$agencia$posto$conta$nnum");
-            $nossonumero_dv      ="$nnum$dv_nosso_numero";
-            */
         }
         //formação do campo livre
         $campolivre          = "$tipo_cobranca$tipo_carteira$nossonumero_dv$agencia$posto$conta$filler1$filler2";
         $campolivre_dv       = $campolivre . $this->DigitoVerificadorCampoLivre($campolivre); 
-
         // 43 numeros para o calculo do digito verificador do codigo de barras
         $dv = $this->DigitoVerificadorBarra("$codigobanco$nummoeda$fator_vencimento$valor$campolivre_dv", 9, 0);
-
         // Numero para o codigo de barras com 44 digitos
         $linha = "$codigobanco$nummoeda$dv$fator_vencimento$valor$campolivre_dv";
-
         // Formata strings para impressao no boleto
         $nossonumero = substr($nossonumero_dv,0,2).'/'.substr($nossonumero_dv,2,6).'-'.substr($nossonumero_dv,8,1);
         $agencia_codigo = $agencia.".". $posto.".".$conta;
@@ -74,8 +63,6 @@ class BoletoSicredi{
                 "codigo_banco"    => $codigo_banco,
                 "nosso_numero"    => $nossonumero
             );
-
-
     }
     /**
      * [GeraNossoNumero description]
